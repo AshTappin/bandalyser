@@ -4,6 +4,7 @@ import { BandService } from '../band-service.service';
 import { AlbumService } from '../album.service';
 import { AudioFeaturesService } from '../audio-features.service';
 import * as moment from 'moment';
+import { flatMap } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-album-analysis',
@@ -35,11 +36,10 @@ export class AlbumAnalysisComponent implements OnInit {
         this.albums
           .filter(album => !album.name.includes('Deluxe'))
           .forEach(album => {
-          this.albumService.getTracks(album.id).subscribe((response: any )=> {
 
-            this.audioFeatures.getAudioFeaturesForTracks(response.items.map(track => track.id))
-              .subscribe((response: any )=> {
-
+          this.albumService.getTracks(album.id)
+            .pipe(flatMap((response: any) => this.audioFeatures.getAudioFeaturesForTracks(response.items.map(track => track.id))))
+            .subscribe((response: any )=> {
                 const energyForAllTracks = response.audio_features.map(audioFeatures => audioFeatures.energy);
                 const energyAverage = energyForAllTracks.reduce((a,b) => a + b, 0) / energyForAllTracks.length;
                 this.energyDatapoints.push(this.createDataPoint(album, energyAverage));
@@ -62,7 +62,6 @@ export class AlbumAnalysisComponent implements OnInit {
 
                 this.drawGraph();
               });
-            })
           })
         });
 
