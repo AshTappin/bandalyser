@@ -23,7 +23,7 @@ export class BandService {
 
   getAlbums(bandId: string) {
     const authtoken = localStorage.getItem('authtoken');
-    const url = this.baseUrl + bandId + '/albums?offset=0&include_groups=album&market=GB';
+    const url = this.baseUrl + bandId + '/albums?offset=0&include_groups=album&market=GB&limit=50';
     return this.httpClient.get(url, {
       headers: {
         'Authorization': `Bearer ${authtoken}`
