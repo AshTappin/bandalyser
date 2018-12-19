@@ -34,29 +34,33 @@ export class AlbumAnalysisComponent implements OnInit {
       .subscribe((response: any) => {
         this.albums = response.items;
         this.albums
-          .filter(album => !album.name.includes('Deluxe'))
           .forEach(album => {
 
             this.albumService.getTracks(album.id)
               .pipe(flatMap((response: any) => this.audioFeatures.getAudioFeaturesForTracks(response.items.map(track => track.id))))
               .subscribe((response: any) => {
-                const energyAverage = this.calculateAverageMetric(response, track => track.energy);
-                this.energyDatapoints.push(this.createDataPoint(album, energyAverage));
-                this.energyDatapoints = this.energyDatapoints.sort(this.sortByDate());
 
-                const danceabilityAverage = this.calculateAverageMetric(response, audioFeatures => audioFeatures.danceability);
-                this.danceabilityDatapoints.push(this.createDataPoint(album, danceabilityAverage));
-                this.danceabilityDatapoints = this.danceabilityDatapoints.sort(this.sortByDate());
+                const speechinessAverage = this.calculateAverageMetric(response, track => track.speechiness);
+                let trackLikelyToNotJustBeTalking = speechinessAverage < 0.66;
+                if (trackLikelyToNotJustBeTalking) {
+                  const energyAverage = this.calculateAverageMetric(response, track => track.energy);
+                  this.energyDatapoints.push(this.createDataPoint(album, energyAverage));
+                  this.energyDatapoints = this.energyDatapoints.sort(this.sortByDate());
 
-                const valenceAverage = this.calculateAverageMetric(response, audioFeatures => audioFeatures.valence);
-                this.valenceDatapoints.push(this.createDataPoint(album, valenceAverage));
-                this.valenceDatapoints = this.valenceDatapoints.sort(this.sortByDate());
+                  const danceabilityAverage = this.calculateAverageMetric(response, audioFeatures => audioFeatures.danceability);
+                  this.danceabilityDatapoints.push(this.createDataPoint(album, danceabilityAverage));
+                  this.danceabilityDatapoints = this.danceabilityDatapoints.sort(this.sortByDate());
 
-                const livenessAverage = this.calculateAverageMetric(response, audioFeatures => audioFeatures.liveness);
-                this.livenessDatapoints.push(this.createDataPoint(album, livenessAverage));
-                this.livenessDatapoints = this.livenessDatapoints.sort(this.sortByDate());
+                  const valenceAverage = this.calculateAverageMetric(response, audioFeatures => audioFeatures.valence);
+                  this.valenceDatapoints.push(this.createDataPoint(album, valenceAverage));
+                  this.valenceDatapoints = this.valenceDatapoints.sort(this.sortByDate());
 
-                this.drawGraph();
+                  const livenessAverage = this.calculateAverageMetric(response, audioFeatures => audioFeatures.liveness);
+                  this.livenessDatapoints.push(this.createDataPoint(album, livenessAverage));
+                  this.livenessDatapoints = this.livenessDatapoints.sort(this.sortByDate());
+
+                  this.drawGraph();
+                }
               });
           })
       });
