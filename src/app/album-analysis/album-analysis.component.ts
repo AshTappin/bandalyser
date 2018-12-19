@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as CanvasJS from '../top-tracks/canvasjs.min.js';
+import * as CanvasJS from '../analysis-results/canvasjs.min.js';
 import { BandService } from '../band-service.service';
 import { AlbumService } from '../album.service';
 import { AudioFeaturesService } from '../audio-features.service';
@@ -69,9 +69,8 @@ export class AlbumAnalysisComponent implements OnInit {
   }
 
   private calculateAverageMetric(response: any, metric: Function) {
-    const energyForAllTracks = response.audio_features.map(metric);
-    const energyAverage = energyForAllTracks.reduce((a, b) => a + b, 0) / energyForAllTracks.length;
-    return energyAverage;
+    const metricsForAllTracks = response.audio_features.map(metric);
+    return metricsForAllTracks.reduce((a, b) => a + b, 0) / metricsForAllTracks.length;
   }
 
   createDataPoint(album: any, metric: number) {

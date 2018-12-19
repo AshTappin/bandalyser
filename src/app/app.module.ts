@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthTokenService } from './auth-token.service';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
-import { TopTracksComponent } from './top-tracks/top-tracks.component';
+import { AnalysisResultsComponent } from './analysis-results/analysis-results.component';
 import { BandService } from './band-service.service';
 import { AudioFeaturesService } from './audio-features.service';
 import { AlbumAnalysisComponent } from './album-analysis/album-analysis.component';
@@ -22,7 +22,7 @@ import { AlbumService } from './album.service';
     AppComponent,
     SearchBarComponent,
     HomeComponent,
-    TopTracksComponent,
+    AnalysisResultsComponent,
     AlbumAnalysisComponent
   ],
   imports: [

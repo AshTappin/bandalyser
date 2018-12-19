@@ -8,10 +8,10 @@ import * as moment from 'moment';
 
 @Component({
   selector: 'app-top-tracks',
-  templateUrl: './top-tracks.component.html',
-  styleUrls: ['./top-tracks.component.css']
+  templateUrl: './analysis-results.component.html',
+  styleUrls: ['./analysis-results.component.css']
 })
-export class TopTracksComponent implements OnInit {
+export class AnalysisResultsComponent implements OnInit {
   bandName: string;
   bandId: string;
   bandImageLink: string;
