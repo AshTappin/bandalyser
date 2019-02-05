@@ -6,7 +6,7 @@ import { AnalysisResultsComponent } from './analysis-results/analysis-results.co
 
 export const routes: Routes = [
   {path: '', component: HomeComponent, data : {state: 'home'}},
-  {path: 'toptracks/:bandid', component: AnalysisResultsComponent, data : {state: 'toptracks'}}
+  {path: 'analysis/:bandid', component: AnalysisResultsComponent, data : {state: 'toptracks'}}
 ];
 
 @NgModule({

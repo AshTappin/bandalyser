@@ -16,6 +16,7 @@ import { BandService } from './band-service.service';
 import { AudioFeaturesService } from './audio-features.service';
 import { AlbumAnalysisComponent } from './album-analysis/album-analysis.component';
 import { AlbumService } from './album.service';
+import { TrackAnalysisComponent } from './track-analysis/track-analysis.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AlbumService } from './album.service';
     SearchBarComponent,
     HomeComponent,
     AnalysisResultsComponent,
-    AlbumAnalysisComponent
+    AlbumAnalysisComponent,
+    TrackAnalysisComponent
   ],
   imports: [
     BrowserModule,

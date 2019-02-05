@@ -3,7 +3,7 @@
     <input class="BandSearchBox" [formControl]="queryField" type="text" id="keyword" placeholder="Search for artists..." autofocus/>
   </div>
   <div class="SearchResults">
-    <div class="BandResult" *ngFor="let result of results" routerLink="toptracks/{{result.id}}">
+    <div class="BandResult" *ngFor="let result of results" routerLink="analysis/{{result.id}}">
       <img src="{{result.images['0']?.url}}" alt="" width="50" height="50">
       <div class="BandResult-name">{{result.name}}</div>
     </div>
